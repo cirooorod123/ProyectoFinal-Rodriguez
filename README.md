@@ -21,11 +21,19 @@ las dependencias que yo use fueron obviamente Django, y ademas Pillow
 instalar: pip install Pillow
 
 Características
-...
+- pagina dinamica facil de usar
+- barra de busqueda para encontrar productos
+- estilo moderno
+- opcion de poner ofertas
 
-...
+
 
 Mejoras a futuro
-...
 
-...
+- ordenes de compra
+- subir a google
+- mejorar la apariencia
+- habilitar el carrito
+
+
+saludos profe! fue un gusto.

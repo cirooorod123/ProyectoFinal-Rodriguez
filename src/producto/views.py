@@ -1,11 +1,12 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from . import models, forms
+from .models import Producto
 
 
-def index(request):
-    return render(request, "producto/index.html")
+#def index(request):
+#    return render(request, "producto/index.html")
 
 
 def categoria_list(request):
@@ -80,3 +81,14 @@ class ProductoDetailView(DetailView):
 class ProductoDeleteView(DeleteView):
     model = models.Producto
     success_url = reverse_lazy("producto:producto_list")
+
+
+
+
+def index(request):
+    productos = Producto.objects.all()
+    return render(request, 'index.html', {'productos': productos})
+
+def detalle_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    return render(request, 'core/detalle.html', {'producto': producto})

@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="text-center">
+        <div class="alert alert-success rounded-4 shadow-sm p-4">
+            <h4 class="alert-heading">Sesión cerrada</h4>
+            <p class="mb-3">Has cerrado sesión correctamente.</p>
+            <a href="{% url 'core:index' %}" class="btn btn-outline-primary">Volver al inicio</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

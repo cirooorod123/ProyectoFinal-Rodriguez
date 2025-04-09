@@ -1,57 +1,52 @@
-{%extends 'core/base.html' %}
+{% extends "core/base.html" %}
+{% load static %}
 
-{%block content %}
-
-<!-- Section -->
+{% block content %}
+{% include 'componentes/header.html' %}
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for producto in productos %}
             <div class="col mb-5">
-                <div class="card h-100">
+                <div class="card h-100 text-center shadow rounded-4 position-relative">
+
                     {% if producto.en_oferta %}
-                    <!-- Sale badge -->
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                     {% endif %}
 
-                    <!-- Product image -->
-                    <img class="card-img-top" src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" />
+                    <img class="card-img-top" src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" style="height: 200px; object-fit: cover;" />
 
-                    <!-- Product details -->
                     <div class="card-body p-4">
-                        <div class="text-center">
-                            <h5 class="fw-bolder">{{ producto.nombre }}</h5>
+                        <h5 class="fw-bold">{{ producto.nombre }}</h5>
 
-                            {% if producto.mostrar_estrellas %}
-                            <!-- Product reviews -->
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                {% for _ in "12345"|slice:":producto.estrellas" %}
-                                <div class="bi-star-fill"></div>
-                                {% endfor %}
-                            </div>
-                            {% endif %}
+                        {% if producto.mostrar_estrellas %}
+                        <div class="d-flex justify-content-center small text-warning mb-2">
+                            {% for _ in "12345"|slice:":producto.estrellas" %}
+                            <div class="bi-star-fill"></div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
 
-                            <!-- Product price -->
+                        <div class="d-flex justify-content-center align-items-center gap-2">
                             {% if producto.precio_original %}
                             <span class="text-muted text-decoration-line-through">${{ producto.precio_original }}</span>
                             {% endif %}
-                            ${{ producto.precio }}
+                            <span class="fw-bold text-dark">${{ producto.precio }}</span>
                         </div>
                     </div>
 
-                    <!-- Product actions -->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" href="{{ producto.link }}">Ver más</a>
-                        </div>
+                    <!-- Botón Más información -->
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="{% url 'producto:detalle' producto.id %}" class="btn btn-primary w-100">Más información</a>
+
+
                     </div>
+
                 </div>
             </div>
             {% endfor %}
-
         </div>
     </div>
 </section>
-
 {% endblock content %}
+

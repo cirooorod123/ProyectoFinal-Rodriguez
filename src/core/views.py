@@ -5,13 +5,21 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import LoginForm, RegisterForm
+from producto.models import Producto
+
 
 
 
 def index(request):
-    return render(request, "core/index.html")
-
-
+    query = request.GET.get('q')  
+    if query:
+        productos = Producto.objects.filter(nombre__icontains=query)
+    else:
+        productos = Producto.objects.all()
+    return render(request, 'core/index.html', {
+        'productos': productos,
+        'query': query,  # esto es útil si querés mostrar el término buscado
+    })
 
 def about(request):
     return render(request, "core/about.html")
@@ -36,3 +44,5 @@ class MiRegisterView(CreateView):
     def form_valid(self, form):
         messages.success(self.request, "Registro exitoso. Ahora puedes iniciar sesión")
         return super().form_valid(form)
+
+

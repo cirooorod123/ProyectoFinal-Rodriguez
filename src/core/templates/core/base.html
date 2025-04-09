@@ -15,14 +15,13 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href={%static "core/css/styles.css"%} rel="stylesheet" />
     </head>
+
     <body>
         <!-- Navigation-->
         {% include 'componentes/nav.html' %}
-        <!-- Header-->
-        {% include 'componentes/header.html' %}
+
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {% block content %}
                 {% endblock %}
             </div>
